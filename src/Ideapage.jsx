@@ -1,6 +1,6 @@
 import { useState } from "react";
 import Structure from "./Structure.jsx";
-import "./IdeaPage.css";
+import "./Ideapage.css";
 
 export default function IdeaPage() {
   const [idea, setIdea] = useState("");
