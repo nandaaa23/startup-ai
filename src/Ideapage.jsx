@@ -2,6 +2,7 @@ import { useState } from "react";
 import { Routes, Route, useNavigate } from "react-router-dom";
 import Structure from "./Structure.jsx";
 import Checklist from "./Checklist.jsx";
+import { analyzeIdea } from "./services/api";
 import "./IdeaPage.css";
 
 function IdeaForm() {
@@ -12,18 +13,22 @@ function IdeaForm() {
 
   const handleAnalyze = async () => {
     if (!idea.trim()) return;
-
     setLoading(true);
 
-    setTimeout(() => {
-      const score = Math.floor(Math.random() * 100) + 1;
-      const message =
-        score >= 60
-          ? "💡 Good startup idea!"
-          : "⚠️ Needs improvement.";
-      setAiResult({ score, message });
+    try {
+      const data = await analyzeIdea({ idea }); // Pass object, safe for future optional fields
+      setAiResult({
+        score: data.innovation_score,
+        message: data.mentor_note,
+        verdict: data.verdict,
+        details: data,
+      });
+    } catch (err) {
+      console.error("Analysis failed", err);
+      alert("Failed to analyze idea. Check console for details.");
+    } finally {
       setLoading(false);
-    }, 1500);
+    }
   };
 
   return (
@@ -46,14 +51,12 @@ function IdeaForm() {
         {aiResult && (
           <div className="chat-card fade-in">
             <h2 className="chat-title">AI Analysis Result</h2>
-            <p>
-              <strong>Score:</strong> {aiResult.score}%
-            </p>
+            <p><strong>Score:</strong> {aiResult.score}%</p>
             <p>{aiResult.message}</p>
+            <p><strong>Verdict:</strong> {aiResult.verdict}</p>
 
-            <button onClick={() => navigate("/structure")}>
-              Continue
-            </button>
+            <button onClick={() => navigate("/structure")}>Continue</button>
+            <button onClick={() => setAiResult(null)}>Try Again</button>
           </div>
         )}
       </div>
