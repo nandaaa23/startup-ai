@@ -1,5 +1,5 @@
 import { useState } from "react";
-import "./PitchDeck.css";
+import "./Pitchdeck.css";
 
 // ── DATA ──────────────────────────────────────────
 const FUNDING_SCHEMES = [
