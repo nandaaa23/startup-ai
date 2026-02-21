@@ -1,61 +1,432 @@
-.page-bg {
+/* ──────────────────────────────────────────
+   Checklist.css — HELIX aesthetic
+   Matches front.css, IdeaPage.css, Structure.css
+────────────────────────────────────────── */
+
+@import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@400;600;900&family=DM+Sans:wght@300;400;500&display=swap');
+
+/* ── PAGE ── */
+.checklist-page-bg {
   min-height: 100vh;
-  background: linear-gradient(135deg, #7050f0, #a183f5, #d3b3ff);
+  width: 100vw;
+  background: #06040f;
   display: flex;
   justify-content: center;
-  padding: 50px;
-  font-family: 'Segoe UI', sans-serif;
+  position: relative;
+  overflow-x: hidden;
+  font-family: 'DM Sans', sans-serif;
+  padding-bottom: 60px;
 }
 
+/* ── ORBS ── */
+.chk-orb {
+  position: fixed;
+  border-radius: 50%;
+  filter: blur(90px);
+  pointer-events: none;
+  z-index: 0;
+}
+.chk-orb-1 {
+  width: 560px; height: 560px;
+  top: -180px; left: -160px;
+  background: radial-gradient(circle, rgba(168,85,247,0.2) 0%, transparent 70%);
+}
+.chk-orb-2 {
+  width: 440px; height: 440px;
+  bottom: -80px; right: -80px;
+  background: radial-gradient(circle, rgba(29,25,212,0.28) 0%, transparent 70%);
+}
+.chk-orb-3 {
+  width: 320px; height: 320px;
+  top: 40%; left: 55%;
+  background: radial-gradient(circle, rgba(192,132,252,0.12) 0%, transparent 70%);
+}
+
+/* ── NOISE ── */
+.chk-noise {
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: 1;
+  opacity: 0.03;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)'/%3E%3C/svg%3E");
+  background-size: 128px 128px;
+}
+
+/* ── CONTAINER ── */
 .checklist-container {
-  width: 800px;
-  background: white;
-  border: 4px solid #4733f0;
-  box-shadow: 10px 10px 0px #a183f5;
+  position: relative;
+  z-index: 2;
+  width: 100%;
+  max-width: 680px;
+  padding: 40px 20px 48px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 20px;
+}
+
+/* ── BRAND ── */
+.chk-brand {
+  font-family: 'Orbitron', sans-serif;
+  font-size: 1.1rem;
+  font-weight: 900;
+  letter-spacing: 0.22em;
+  color: #d8b4fe;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  animation: chk-fade-up 0.5s ease both;
+}
+.chk-brand-dot {
+  width: 8px; height: 8px;
+  border-radius: 50%;
+  background: #a855f7;
+  box-shadow: 0 0 12px #a855f7;
+  animation: chk-pulse 2s ease-in-out infinite;
+}
+
+/* ── STEP INDICATOR ── */
+.chk-steps {
+  display: flex;
+  align-items: center;
+  animation: chk-fade-up 0.5s ease 0.1s both;
+}
+.chk-step {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 0.72rem;
+  letter-spacing: 0.06em;
+  color: rgba(226,217,243,0.3);
+  font-family: 'Orbitron', sans-serif;
+}
+.chk-step.active { color: #d8b4fe; }
+.chk-step.done   { color: rgba(216,180,254,0.5); }
+.chk-step-dot {
+  width: 8px; height: 8px;
+  border-radius: 50%;
+  border: 1.5px solid currentColor;
+  background: transparent;
+}
+.chk-step.active .chk-step-dot {
+  background: #a855f7;
+  border-color: #a855f7;
+  box-shadow: 0 0 8px #a855f7;
+}
+.chk-step.done .chk-step-dot {
+  background: rgba(168,85,247,0.4);
+  border-color: rgba(168,85,247,0.4);
+}
+.chk-step-line {
+  width: 40px; height: 1px;
+  background: rgba(168,85,247,0.2);
+  margin: 0 8px;
+}
+
+/* ── HEADER CARD ── */
+.chk-header-card {
+  width: 100%;
+  background: rgba(255,255,255,0.04);
+  backdrop-filter: blur(18px);
+  border: 1px solid rgba(168,85,247,0.22);
   border-radius: 20px;
-  padding: 40px;
+  padding: 32px;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  box-shadow: 0 24px 60px rgba(0,0,0,0.5), inset 0 1px 0 rgba(255,255,255,0.06);
+  animation: chk-appear 0.6s ease both;
 }
 
-.accordion {
-  margin-top: 20px;
-  border: 3px solid #4733f0;
-  border-radius: 12px;
+/* ── BADGE ── */
+.chk-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 0.75rem;
+  letter-spacing: 0.08em;
+  color: #d8b4fe;
+  background: rgba(168,85,247,0.1);
+  border: 1px solid rgba(168,85,247,0.28);
+  border-radius: 100px;
+  padding: 6px 14px;
+  width: fit-content;
+}
+.chk-badge-pulse {
+  width: 7px; height: 7px;
+  border-radius: 50%;
+  background: #a855f7;
+  box-shadow: 0 0 8px #a855f7;
+  animation: chk-pulse 1.8s ease-in-out infinite;
 }
 
-.accordion-header {
-  padding: 15px;
-  font-weight: bold;
-  cursor: pointer;
-  background: #d3b3ff;
+/* ── TITLE ── */
+.chk-title {
+  font-family: 'Orbitron', sans-serif;
+  font-size: clamp(1.2rem, 3vw, 1.7rem);
+  font-weight: 700;
+  color: #ede9fe;
+  line-height: 1.25;
+}
+.chk-gradient-text {
+  background: linear-gradient(90deg, #f5d0fe, #a855f7, #3b51d4);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  background-size: 200%;
+  animation: chk-gradient-shift 4s ease infinite;
 }
 
-.accordion-content {
-  padding: 15px;
+/* ── PROGRESS BAR ── */
+.chk-progress-wrap {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+.chk-progress-bar {
+  width: 100%;
+  height: 8px;
+  background: rgba(168,85,247,0.12);
+  border-radius: 100px;
+  overflow: visible;
+  position: relative;
+}
+.chk-progress-fill {
+  height: 100%;
+  border-radius: 100px;
+  background: linear-gradient(90deg, #a855f7, #3b51d4);
+  transition: width 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+  position: relative;
+}
+.chk-progress-glow {
+  position: absolute;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  width: 14px; height: 14px;
+  border-radius: 50%;
+  background: #a855f7;
+  box-shadow: 0 0 12px #a855f7;
+  transition: left 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+  pointer-events: none;
+}
+.chk-progress-labels {
+  display: flex;
+  justify-content: space-between;
+}
+.chk-progress-pct {
+  font-family: 'Orbitron', sans-serif;
+  font-size: 0.72rem;
+  color: #d8b4fe;
+  letter-spacing: 0.06em;
+}
+.chk-progress-count {
+  font-size: 0.72rem;
+  color: rgba(226,217,243,0.4);
+}
+
+/* ── MODULES LIST ── */
+.chk-modules {
+  width: 100%;
   display: flex;
   flex-direction: column;
   gap: 10px;
 }
 
-.checkbox-item {
-  font-weight: bold;
-}
-
-.portal-link {
-  margin-bottom: 10px;
-  font-weight: bold;
-  color: #4733f0;
-  text-decoration: none;
-}
-
-.progress-bar {
+/* ── ACCORDION ── */
+.chk-accordion {
   width: 100%;
-  height: 18px;
-  background: #eee;
-  border: 3px solid #4733f0;
-  margin-top: 20px;
+  background: rgba(255,255,255,0.03);
+  border: 1px solid rgba(168,85,247,0.18);
+  border-radius: 14px;
+  overflow: hidden;
+  transition: border-color 0.3s ease, box-shadow 0.3s ease;
+  animation: chk-fade-up 0.4s ease both;
+}
+.chk-accordion.open {
+  border-color: rgba(168,85,247,0.4);
+  box-shadow: 0 0 0 1px rgba(168,85,247,0.1), 0 8px 32px rgba(0,0,0,0.3);
+}
+.chk-accordion.all-done {
+  border-color: rgba(74,222,128,0.35);
 }
 
-.progress-fill {
-  height: 100%;
-  background: #7050f0;
+/* ── ACCORDION HEADER ── */
+.chk-accordion-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 16px 20px;
+  cursor: pointer;
+  user-select: none;
+  transition: background 0.2s ease;
 }
+.chk-accordion-header:hover {
+  background: rgba(168,85,247,0.06);
+}
+.chk-acc-left {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+.chk-acc-icon { font-size: 1.1rem; }
+.chk-acc-title {
+  font-family: 'Orbitron', sans-serif;
+  font-size: 0.72rem;
+  font-weight: 600;
+  letter-spacing: 0.06em;
+  color: #e2d9f3;
+}
+.chk-acc-right {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+.chk-acc-count {
+  font-family: 'Orbitron', sans-serif;
+  font-size: 0.65rem;
+  color: rgba(168,85,247,0.7);
+  letter-spacing: 0.06em;
+}
+.chk-acc-chevron {
+  font-size: 1.3rem;
+  color: rgba(168,85,247,0.6);
+  line-height: 1;
+  display: inline-block;
+  transition: transform 0.3s ease;
+}
+.chk-acc-chevron.rotated { transform: rotate(90deg); }
+
+/* ── ACCORDION CONTENT ── */
+.chk-accordion-content {
+  padding: 0 20px 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  border-top: 1px solid rgba(168,85,247,0.1);
+}
+
+/* ── PORTAL LINK ── */
+.chk-portal-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 0.78rem;
+  font-weight: 500;
+  color: rgba(168,85,247,0.85);
+  text-decoration: none;
+  padding: 8px 0 4px;
+  letter-spacing: 0.03em;
+  transition: color 0.25s ease;
+}
+.chk-portal-link:hover { color: #d8b4fe; }
+
+/* ── CHECKLIST ITEMS ── */
+.chk-items {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+.chk-item {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 10px 14px;
+  border-radius: 10px;
+  border: 1px solid rgba(168,85,247,0.1);
+  background: rgba(255,255,255,0.02);
+  cursor: pointer;
+  transition: background 0.2s ease, border-color 0.2s ease;
+}
+.chk-item:hover {
+  background: rgba(168,85,247,0.06);
+  border-color: rgba(168,85,247,0.25);
+}
+.chk-item.item-done {
+  background: rgba(74,222,128,0.04);
+  border-color: rgba(74,222,128,0.2);
+}
+
+/* ── CUSTOM CHECKBOX ── */
+.chk-checkbox-wrap { flex-shrink: 0; }
+.chk-checkbox-input { display: none; }
+.chk-custom-checkbox {
+  width: 20px; height: 20px;
+  border-radius: 6px;
+  border: 1.5px solid rgba(168,85,247,0.45);
+  background: transparent;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: background 0.2s ease, border-color 0.2s ease, box-shadow 0.2s ease;
+  cursor: pointer;
+}
+.chk-custom-checkbox.checked {
+  background: linear-gradient(135deg, #a855f7, #3b51d4);
+  border-color: transparent;
+  box-shadow: 0 0 10px rgba(168,85,247,0.5);
+}
+.chk-checkmark {
+  width: 10px; height: 9px;
+  fill: none;
+  stroke: #fff;
+  stroke-width: 2;
+}
+
+.chk-item-text {
+  font-size: 0.88rem;
+  color: rgba(226,217,243,0.75);
+  font-weight: 400;
+  transition: color 0.2s ease;
+}
+.item-done .chk-item-text {
+  color: rgba(226,217,243,0.4);
+  text-decoration: line-through;
+  text-decoration-color: rgba(168,85,247,0.4);
+}
+
+/* ── COMPLETION BANNER ── */
+.chk-complete-banner {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  padding: 18px 24px;
+  border-radius: 14px;
+  background: rgba(74,222,128,0.08);
+  border: 1px solid rgba(74,222,128,0.3);
+  font-size: 0.9rem;
+  color: #86efac;
+  font-weight: 500;
+  animation: chk-appear 0.5s ease both;
+  box-shadow: 0 0 24px rgba(74,222,128,0.1);
+}
+
+/* ── KEYFRAMES ── */
+@keyframes chk-fade-up {
+  from { opacity: 0; transform: translateY(18px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+@keyframes chk-appear {
+  from { opacity: 0; transform: translateY(24px) scale(0.98); }
+  to   { opacity: 1; transform: translateY(0) scale(1); }
+}
+@keyframes chk-gradient-shift {
+  0%, 100% { background-position: 0% 50%; }
+  50%       { background-position: 100% 50%; }
+}
+@keyframes chk-pulse {
+  0%, 100% { transform: scale(1); opacity: 1; }
+  50%       { transform: scale(1.6); opacity: 0.5; }
+}
+
+/* ── RESPONSIVE ── */
+@media (max-width: 600px) {
+  .checklist-container { padding: 24px 16px 40px; }
+  .chk-header-card { padding: 24px 20px; }
+  .chk-acc-title { font-size: 0.65rem; }
+}
+
+/* ── BACKWARDS COMPAT ── */
+.page-bg { display: none; }
