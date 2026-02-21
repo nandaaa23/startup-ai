@@ -1,65 +1,56 @@
+
 CHECKLIST_MAP = {
-    "basic_docs": {
-        "title": "Prepare Basic Documents",
-        "steps": [
-            "Aadhaar",
-            "PAN",
-            "Passport photo",
-            "Address proof",
-            "Office address proof"
+    "Private Limited": {
+        "food": [
+            "Register with FSSAI",
+            "Obtain GST registration",
+            "Get trade license from local municipality",
+            "Food safety and hygiene certification",
+            "Check labeling compliance"
+        ],
+        "tech": [
+            "Register with MCA as Private Limited",
+            "Obtain GST registration",
+            "Trademark your product name/logo",
+            "Ensure software licenses are compliant",
+            "Create shareholder agreement"
+        ],
+        "retail": [
+            "Register with local municipality",
+            "GST registration",
+            "Fire safety clearance",
+            "Sign lease agreements if physical store",
+            "Employee compliance documentation"
         ]
     },
-
-    "mca_pvt_ltd": {
-        "title": "Company Registration (Private Limited)",
-        "portal": "https://www.mca.gov.in",
-        "steps": [
-            "Create MCA account",
-            "Apply for Digital Signature (DSC)",
-            "Reserve company name (RUN)",
-            "Fill SPICe+ form",
-            "Receive Certificate of Incorporation"
-        ]
+    "LLP": {
+        "food": [
+            "FSSAI registration",
+            "GST registration",
+            "LLP agreement filing",
+            "Trade license",
+            "Health & safety compliance"
+        ],
+        "tech": [
+            "MCA LLP registration",
+            "GST registration",
+            "IP protection",
+            "Software license compliance",
+            "Data privacy policies"
+        ],
     },
-
-    "startup_india": {
-        "title": "Startup India Recognition",
-        "portal": "https://www.startupindia.gov.in",
-        "steps": [
-            "Register on Startup India",
-            "Upload incorporation certificate",
-            "Describe innovation",
-            "Submit application"
-        ]
-    },
-
-    "gst": {
-        "title": "GST Registration",
-        "portal": "https://www.gst.gov.in",
-        "steps": [
-            "Fill GST REG-01 form",
-            "Upload business & bank details",
-            "Receive GSTIN"
-        ]
-    },
-
-    "msme": {
-        "title": "MSME (Udyam) Registration",
-        "portal": "https://udyamregistration.gov.in",
-        "steps": [
-            "Enter Aadhaar & PAN",
-            "Submit Udyam form",
-            "Receive MSME certificate"
-        ]
-    },
-
-    "kerala_startup": {
-        "title": "Kerala Startup Mission Registration",
-        "portal": "https://startupmission.kerala.gov.in",
-        "steps": [
-            "Create KSUM account",
-            "Apply for startup programs",
-            "Access grants & incubation"
-        ]
+    "Sole Proprietorship": {
+        "food": [
+            "FSSAI registration",
+            "Trade license",
+            "GST if turnover > 40L",
+            "Local municipality clearance"
+        ],
+        "retail": [
+            "Trade license",
+            "GST if required",
+            "Fire & safety checks"
+        ],
     }
 }
+
