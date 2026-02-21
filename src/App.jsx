@@ -3,6 +3,7 @@ import HelixLanding from "./front.jsx";
 import IdeaPage from "./Ideapage.jsx";
 import StructurePage from "./Structure.jsx";
 import Checklist from "./Checklist.jsx";
+import PitchDeck from "./PitchDeck.jsx";
 
 export default function App() {
   return (
@@ -11,6 +12,9 @@ export default function App() {
       <Route path="/idea" element={<IdeaPage />} />
       <Route path="/structure" element={<StructurePage />} />
       <Route path="/checklist" element={<Checklist />} />
+       <Route path="/funding" element={<PitchDeck />} />
     </Routes>
   );
 }
+
+

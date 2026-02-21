@@ -121,7 +121,7 @@ const FeaturePill = ({ icon, text, delay }) => (
 export default function HelixLanding() {
   const [mousePos, setMousePos] = useState({ x: 0, y: 0 });
   const [entered, setEntered] = useState(false);
-  const navigate = useNavigate();   // ← ADDED
+  const navigate = useNavigate();
 
   useEffect(() => {
     const t = setTimeout(() => setEntered(true), 100);
@@ -154,6 +154,14 @@ export default function HelixLanding() {
         <div className="nav-links">
           <a href="#features">Features</a>
           <a href="#how">How it works</a>
+          {/* ── CHANGE 1: Funding nav link added ── */}
+          <a
+            href="/funding"
+            onClick={(e) => { e.preventDefault(); navigate("/funding"); }}
+            className="nav-link-highlight"
+          >
+            💰 Funding
+          </a>
           <a href="#contact">Contact</a>
         </div>
         <button className="nav-cta" onClick={() => navigate("/idea")}>
@@ -181,12 +189,14 @@ export default function HelixLanding() {
           </p>
 
           <div className="cta-row">
-            {/* ── NAVIGATES TO IDEA PAGE ── */}
             <button className="btn-primary" onClick={() => navigate("/idea")}>
               <span>Launch Navigator</span>
               <span className="btn-arrow">→</span>
             </button>
-            <button className="btn-ghost">Watch Demo</button>
+            {/* ── CHANGE 2: ghost button now goes to Funding page ── */}
+            <button className="btn-ghost" onClick={() => navigate("/funding")}>
+              Explore Funding
+            </button>
           </div>
 
           <div className="stats-row">

@@ -6,23 +6,24 @@
 
 ## Basic Details
 
-### Team Name: [Name]
+### Team Name: DAISY
 
 ### Team Members
-- Member 1: [Name] - [College]
-- Member 2: [Name] - [College]
+- Member 1: NANDANA SANIL - LBS INSTITUTE OF TECHNOLOGY FOR WOMEN,TRIVANDRUM
+- Member 2: ASNA MARY ALLEN - LBS INSTITUTE OF TECHNOLOGY FOR WOMEN,TRIVANDRUM
 
 ### Hosted Project Link
 [mention your project hosted link here]
 
 ### Project Description
-[2-3 lines about what your project does]
+HELIX
+An AI-powered web app that guides Indian startups through every step of their journey — from validating ideas to completing registrations, obtaining licenses, and identifying funding opportunities — with personalized checklists and portal links.FRONTEND USED-REACT AND CSS,BACKEND USED-BLOOMLLM,FAST API
 
 ### The Problem statement
-[What problem are you solving?]
+Early-stage startups in India, especially students and first-time founders, struggle to navigate complex registration processes, licenses, and funding options. Existing platforms are fragmented, time-consuming, and often confusing, leading to delays and missed opportunities
 
 ### The Solution
-[How are you solving it?]
+An AI-powered web platform that guides startups step-by-step through idea validation, registration, licensing, and funding processes. It provides personalized checklists, portal links, and compliance guidance, simplifying the startup journey for first-time founders.
 
 ---
 
@@ -31,10 +32,10 @@
 ### Technologies/Components Used
 
 **For Software:**
-- Languages used: [e.g., JavaScript, Python, Java]
-- Frameworks used: [e.g., React, Django, Spring Boot]
-- Libraries used: [e.g., axios, pandas, JUnit]
-- Tools used: [e.g., VS Code, Git, Docker]
+- Languages used: [e.g., JavaScript, Python]
+- Frameworks used: [e.g., React]
+- Libraries used: [e.g., axios, react-router-dom]
+- Tools used: [e.g., VS Code, Git,]
 
 **For Hardware:**
 - Main components: [List main components]
@@ -46,10 +47,10 @@
 ## Features
 
 List the key features of your project:
-- Feature 1: [Description]
-- Feature 2: [Description]
-- Feature 3: [Description]
-- Feature 4: [Description]
+- Feature 1: AI-Powered Idea Analysis – Evaluates startup ideas and provides instant feedback with scores and suggestions.
+- Feature 2: Stepwise Startup Guidance – Guides users through company registration, GST, licenses, and funding pathways.
+- Feature 3: Smart Checklist Builder – Generates a personalized checklist based on sector and startup stage to track all required actions.
+- Feature 4: Interactive UI with Animations – Engaging and visually guided interface with particle effects, animated logos, and smooth transitions
 
 ---
 
@@ -83,14 +84,14 @@ List the key features of your project:
 
 #### Screenshots (Add at least 3)
 
-![Screenshot1](Add screenshot 1 here with proper name)
-*Add caption explaining what this shows*
+![alt text](<Screenshot (722).png>)
+*Homepage of HELIX*
 
-![Screenshot2](Add screenshot 2 here with proper name)
-*Add caption explaining what this shows*
+![alt text](<Screenshot (723).png>)
+*AI SCORE FOR STARTUP*
 
-![Screenshot3](Add screenshot 3 here with proper name)
-*Add caption explaining what this shows*
+![alt text](<Screenshot (721).png>)
+*PITCHDESK AND FUNDING*
 
 #### Diagrams
 

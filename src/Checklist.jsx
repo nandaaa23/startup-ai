@@ -15,51 +15,102 @@ export default function Checklist({ formData = {} }) {
     {
       title: "Module 1: Basic Documents",
       icon: "📄",
-      items: ["Aadhaar", "PAN", "Address Proof"],
+      items: [
+        "Aadhaar Card (All Directors)",
+        "PAN Card (All Directors)",
+        "Passport-size Photographs",
+        "Bank Statement (Last 2 months)",
+        "Mobile Number & Email ID (Linked with Aadhaar)",
+        "Digital Signature Certificate (DSC)"
+      ],
     },
     {
-      title: "Module 2: Company Registration (MCA)",
+      title: "Module 2: Company Registration (MCA - SPICe+)",
       icon: "🏛️",
       portal: "https://www.mca.gov.in/",
-      items: ["Create MCA Account", "Apply DSC", "Reserve Name (RUN)", "Submit SPICe+"],
+      items: [
+        "Create MCA Account",
+        "Reserve Company Name (SPICe+ Part A)",
+        "Apply for DIN (Director Identification Number)",
+        "Prepare MOA (Memorandum of Association)",
+        "Prepare AOA (Articles of Association)",
+        "Registered Office Address Proof",
+        "Rent Agreement / Ownership Proof",
+        "Utility Bill (Not older than 2 months)",
+        "Submit SPICe+ Part B",
+        "Apply for PAN & TAN",
+        "Download Certificate of Incorporation",
+        "Receive CIN (Corporate Identity Number)"
+      ],
     },
     {
       title: "Module 3: GST Registration",
       icon: "💰",
       portal: "https://www.gst.gov.in/",
-      items: ["Check eligibility", "Submit GST REG-01"],
+      items: [
+        "Check GST Eligibility",
+        "Submit GST REG-01",
+        "Upload Business Address Proof",
+        "Receive GSTIN"
+      ],
+      condition: (formData) =>
+        formData.sellsGoods === true ||
+        formData.turnoverExpected > 2000000
     },
     {
-      title: "Module 4: Fintech License (RBI)",
+      title: "Module 4: RBI / Financial License",
       icon: "🏦",
       portal: "https://www.rbi.org.in/",
-      items: ["Check NBFC eligibility", "Prepare compliance documents", "Submit RBI application"],
-      condition: "fintech",
+      items: [
+        "Check NBFC Eligibility",
+        "Minimum Net Owned Fund Requirement",
+        "Prepare Compliance Documents",
+        "Submit RBI Application"
+      ],
+      condition: (formData) =>
+        formData.sector?.toLowerCase() === "fintech"
     },
     {
       title: "Module 4: Food License (FSSAI)",
       icon: "🍽️",
       portal: "https://foscos.fssai.gov.in/",
-      items: ["Select State License", "Upload kitchen address proof", "Submit application"],
-      condition: "foodtech",
+      items: [
+        "Select Basic / State / Central License",
+        "Upload Kitchen Address Proof",
+        "Submit FSSAI Form B",
+        "Receive FSSAI License Number"
+      ],
+      condition: (formData) =>
+        formData.sector?.toLowerCase() === "foodtech"
     },
     {
       title: "Module 4: Health Establishment License",
       icon: "🏥",
-      items: ["Register with State Health Dept", "Upload clinic documents", "Submit compliance form"],
-      condition: "healthtech",
+      items: [
+        "Register with State Health Department",
+        "Upload Clinic / Hospital Documents",
+        "Biomedical Waste Authorization",
+        "Submit Compliance Form"
+      ],
+      condition: (formData) =>
+        formData.sector?.toLowerCase() === "healthtech"
     },
     {
       title: "Module 5: Startup Recognition",
       icon: "🚀",
       portal: "https://www.startupindia.gov.in/",
-      items: ["Register startup", "Upload certificate", "Submit innovation description"],
+      items: [
+        "Register on Startup India Portal",
+        "Upload Certificate of Incorporation",
+        "Submit Innovation Description",
+        "Receive DPIIT Recognition"
+      ],
     },
   ];
 
   const filteredModules = modules.filter((module) => {
     if (!module.condition) return true;
-    return module.condition === selectedSector;
+    return module.condition(formData);
   });
 
   const totalItems = filteredModules.reduce((acc, mod) => acc + mod.items.length, 0);
@@ -211,3 +262,4 @@ export default function Checklist({ formData = {} }) {
     </div>
   );
 }
+

@@ -3,10 +3,10 @@ import Checklist from "./Checklist";
 import "./Structure.css";
 
 export default function StructurePage() {
-
   const [form, setForm] = useState({
     name: "",
     sector: "",
+    description: "",
     stage: "",
     funding: "",
     teamSize: "",
@@ -14,18 +14,56 @@ export default function StructurePage() {
   });
 
   const [step, setStep] = useState("form");
+  const [formData, setFormData] = useState(null); // enriched formData to send to Checklist
 
   const handleChange = (e) => {
     setForm({ ...form, [e.target.name]: e.target.value });
   };
 
+  // Lightweight keyword-based analysis
+  const analyzeStartup = (form) => {
+    const text = (
+      form.sector + " " + form.description + " " + form.name
+    ).toLowerCase();
+
+    const license = {
+      fintech: /fintech|payment|wallet|bank|nbfc/i.test(text),
+      foodtech: /food|restaurant|cafe|catering|snacks/i.test(text),
+      healthtech: /health|clinic|hospital|medical|doctor/i.test(text),
+    };
+
+    const sellsGoods = /product|food|goods|snacks|item/i.test(text);
+    const sellsServices = /service|consult|clinic|software|app|platform/i.test(text);
+
+    // Determine sector if user didn’t select or selected Other
+    let analyzedSector = "other";
+    if (license.fintech) analyzedSector = "fintech";
+    else if (license.foodtech) analyzedSector = "foodtech";
+    else if (license.healthtech) analyzedSector = "healthtech";
+
+    return { ...form, analyzedSector, license, sellsGoods, sellsServices };
+  };
+
   const handleSubmit = () => {
-    if (!form.name || !form.sector) return;
+    if (!form.name || !form.sector) return alert("Please provide all required info");
+
+    const analyzedForm = analyzeStartup(form);
+
+    // Show the analysis in the console
+    console.log("=== Startup Analysis ===");
+    console.log(analyzedForm);
+
+    // Use AI-analyzed sector if user selects Other
+    if (!form.sector || form.sector.toLowerCase() === "other") {
+      analyzedForm.sector = analyzedForm.analyzedSector;
+    }
+
+    setFormData(analyzedForm); // send enriched formData to Checklist
     setStep("checklist");
   };
 
-  if (step === "checklist") {
-    return <Checklist formData={form} />;
+  if (step === "checklist" && formData) {
+    return <Checklist formData={formData} />;
   }
 
   return (
@@ -97,20 +135,31 @@ export default function StructurePage() {
               </a>
             </div>
 
-            <div className="str-row">
-              <div className="str-field-group">
-                <label className="str-label">Sector</label>
-                <select name="sector" onChange={handleChange} className="str-select">
-                  <option value="">Select Sector</option>
-                  <option>Fintech</option>
-                  <option>EdTech</option>
-                  <option>HealthTech</option>
-                  <option>FoodTech</option>
-                  <option>E-Commerce</option>
-                  <option>Other</option>
-                </select>
-              </div>
+            <div className="str-field-group">
+              <label className="str-label">Sector</label>
+              <select name="sector" onChange={handleChange} className="str-select">
+                <option value="">Select Sector</option>
+                <option>Fintech</option>
+                <option>EdTech</option>
+                <option>HealthTech</option>
+                <option>FoodTech</option>
+                <option>E-Commerce</option>
+                <option>Other</option>
+              </select>
+            </div>
 
+            <div className="str-field-group">
+              <label className="str-label">Description / Keywords</label>
+              <textarea
+                name="description"
+                placeholder="e.g. Clinic providing healthcare services"
+                value={form.description}
+                onChange={handleChange}
+                className="str-textarea"
+              />
+            </div>
+
+            <div className="str-row">
               <div className="str-field-group">
                 <label className="str-label">Stage</label>
                 <select name="stage" onChange={handleChange} className="str-select">
@@ -121,9 +170,7 @@ export default function StructurePage() {
                   <option>Revenue</option>
                 </select>
               </div>
-            </div>
 
-            <div className="str-row">
               <div className="str-field-group">
                 <label className="str-label">Need Funding?</label>
                 <select name="funding" onChange={handleChange} className="str-select">
@@ -132,7 +179,9 @@ export default function StructurePage() {
                   <option>No</option>
                 </select>
               </div>
+            </div>
 
+            <div className="str-row">
               <div className="str-field-group">
                 <label className="str-label">Team Size</label>
                 <input
@@ -143,16 +192,16 @@ export default function StructurePage() {
                   className="str-input"
                 />
               </div>
-            </div>
 
-            <div className="str-field-group">
-              <label className="str-label">Founder Type</label>
-              <select name="founderType" onChange={handleChange} className="str-select">
-                <option value="">Select Founder Type</option>
-                <option>Student</option>
-                <option>Professional</option>
-                <option>Mixed</option>
-              </select>
+              <div className="str-field-group">
+                <label className="str-label">Founder Type</label>
+                <select name="founderType" onChange={handleChange} className="str-select">
+                  <option value="">Select Founder Type</option>
+                  <option>Student</option>
+                  <option>Professional</option>
+                  <option>Mixed</option>
+                </select>
+              </div>
             </div>
 
           </div>
