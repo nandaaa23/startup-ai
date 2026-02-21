@@ -8,27 +8,21 @@ export default function IdeaPage() {
   const [idea, setIdea] = useState("");
   const [loading, setLoading] = useState(false);
   const [aiResult, setAiResult] = useState(null);
-  const [goToStructure, setGoToStructure] = useState(false); // ← THE FIX
+  const [goToStructure, setGoToStructure] = useState(false);
 
-  // ── When button clicked, unmount this page and mount Structure ──
+  // ── Navigate to Structure page ──
   if (goToStructure) {
     return <Structure />;
   }
 
-  const handleAnalyze = () => {
+  const handleAnalyze = async () => {
     if (!idea.trim()) return;
     setLoading(true);
-    setTimeout(() => {
-      const score = Math.floor(Math.random() * 100) + 1;
-      const message =
-        score >= 60 ? "💡 Good startup idea!" : "⚠️ Needs improvement.";
-      setAiResult({ score, message });
 
     try {
-      const data = await analyzeIdea({ idea }); // Pass object, safe for future optional fields
+      const data = await analyzeIdea({ idea });
       setAiResult({
         score: data.innovation_score,
-        message: data.mentor_note,
         verdict: data.verdict,
         details: data,
       });
@@ -42,22 +36,19 @@ export default function IdeaPage() {
 
   return (
     <div className="idea-page-bg">
-
       <div className="idea-orb idea-orb-1" />
       <div className="idea-orb idea-orb-2" />
       <div className="idea-orb idea-orb-3" />
       <div className="idea-noise" />
 
       <div className="idea-container">
-
         <div className="idea-brand">
           <span className="idea-brand-dot" />
           HELIX
         </div>
 
         <div className={`idea-card ${aiResult ? "fade-in" : "appear"}`}>
-
-          {!aiResult && (
+          {!aiResult ? (
             <>
               <div className="idea-badge">
                 <span className="idea-badge-pulse" />
@@ -99,10 +90,8 @@ export default function IdeaPage() {
                 )}
               </button>
             </>
-          )}
-
-          {aiResult && (
-            <>
+          ) : (
+            <div className="chat-card fade-in">
               <div className="idea-badge">
                 <span className="idea-badge-pulse green" />
                 Analysis Complete
@@ -116,7 +105,9 @@ export default function IdeaPage() {
                 <svg className="idea-score-ring" viewBox="0 0 120 120">
                   <circle cx="60" cy="60" r="50" fill="none" stroke="rgba(168,85,247,0.15)" strokeWidth="10" />
                   <circle
-                    cx="60" cy="60" r="50"
+                    cx="60"
+                    cy="60"
+                    r="50"
                     fill="none"
                     stroke="url(#scoreGrad)"
                     strokeWidth="10"
@@ -138,13 +129,7 @@ export default function IdeaPage() {
                 </div>
               </div>
 
-              <p className="idea-result-msg">{aiResult.message}</p>
-        {aiResult && (
-          <div className="chat-card fade-in">
-            <h2 className="chat-title">AI Analysis Result</h2>
-            <p><strong>Score:</strong> {aiResult.score}%</p>
-            <p>{aiResult.message}</p>
-            <p><strong>Verdict:</strong> {aiResult.verdict}</p>
+              <p className="idea-result-msg">Verdict: {aiResult.verdict}</p>
 
               <div className="idea-result-stats">
                 <div className="idea-stat">
@@ -163,7 +148,6 @@ export default function IdeaPage() {
                 </div>
               </div>
 
-              {/* ── FIXED: was navigate("structure"), now setState ── */}
               <button
                 onClick={() => setGoToStructure(true)}
                 className="idea-btn-primary"
@@ -171,7 +155,7 @@ export default function IdeaPage() {
                 <span>Continue to Structure</span>
                 <span className="idea-btn-arrow">→</span>
               </button>
-            </>
+            </div>
           )}
         </div>
 
@@ -186,13 +170,10 @@ export default function IdeaPage() {
           <div className="step-line" />
           <div className="idea-step">
             <span className="step-dot" />Checklist
-            <button onClick={() => navigate("/structure")}>Continue</button>
             <button onClick={() => setAiResult(null)}>Try Again</button>
           </div>
         </div>
-
       </div>
     </div>
   );
 }
-

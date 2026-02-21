@@ -19,7 +19,7 @@ def bloom_chat(prompt: str, max_tokens: int = 400) -> dict:
     Simulated Bloom chat: deterministic JSON per idea.
     Repeated ideas get the same output and scores.
     """
-    # Extract the user idea from the prompt
+    
     if "User idea:" in prompt:
         idea_text = prompt.split("User idea:")[-1].strip()
     else:
