@@ -13,7 +13,7 @@
 - Member 2: ASNA MARY ALLEN - LBS INSTITUTE OF TECHNOLOGY FOR WOMEN,TRIVANDRUM
 
 ### Hosted Project Link
-[mention your project hosted link here]
+https://startup-ai-six.vercel.app/
 
 ### Project Description
 HELIX
