@@ -3,7 +3,7 @@ import HelixLanding from "./front.jsx";
 import IdeaPage from "./Ideapage.jsx";
 import StructurePage from "./Structure.jsx";
 import Checklist from "./Checklist.jsx";
-import PitchDeck from "./PitchDeck.jsx";
+import PitchDeck from "./Pitchdeck.jsx";
 
 export default function App() {
   return (

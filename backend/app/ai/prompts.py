@@ -78,3 +78,4 @@ Checklist should:
 - Avoid unnecessary steps for early-stage founders
 - Reflect real Indian startup workflows
 """
+

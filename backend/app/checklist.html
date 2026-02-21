@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Startup Checklist</title>
+    <style>
+        body { font-family: Arial, sans-serif; padding: 20px; }
+        h1, h2 { color: #2E86C1; }
+        ul { list-style: none; padding-left: 0; }
+        li { margin: 8px 0; }
+        .step { background: #D6EAF8; padding: 10px; margin-top: 15px; border-radius: 5px; }
+        .checked { text-decoration: line-through; color: grey; }
+        .button { display: inline-block; padding: 5px 10px; background: #5DADE2; color: white; border-radius: 3px; text-decoration: none; margin-top: 5px; }
+    </style>
+</head>
+<body>
+    <h1>{{ startup_name }} - AI Checklist</h1>
+    <h2>Founder & Structure</h2>
+    <p>Suggested Company Type: {{ company_type }}</p>
+    <p>Number of Founders: {{ num_founders }}</p>
+
+    {% for phase in checklist %}
+    <div class="step">
+        <h3>{{ phase.title }}</h3>
+        <ul>
+            {% for item in phase.items %}
+            <li class="{{ 'checked' if item.checked else '' }}">
+                ☐ {{ item.name }}
+                {% if item.link %}
+                <a href="{{ item.link }}" class="button">Go</a>
+                {% endif %}
+            </li>
+            {% endfor %}
+        </ul>
+    </div>
+    {% endfor %}
+</body>
+</html>

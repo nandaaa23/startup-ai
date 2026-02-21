@@ -1,3 +1,4 @@
+
 CHECKLIST_MAP = {
     "Private Limited": {
         "food": [
@@ -52,3 +53,4 @@ CHECKLIST_MAP = {
         ],
     }
 }
+

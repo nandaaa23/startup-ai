@@ -1,5 +1,6 @@
 # app/ai/client.py
 from transformers import AutoModelForCausalLM, AutoTokenizer
+import torch
 import json
 import re
 import hashlib

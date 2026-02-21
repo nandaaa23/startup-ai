@@ -49,3 +49,4 @@ LICENSES_MAP = {
         ],
     }
 }
+
