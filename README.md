@@ -67,15 +67,6 @@ List the key features of your project:
 ```bash
 [Run commands - e.g., npm start, python app.py]
 ```
-
-### For Hardware:
-
-#### Components Required
-[List all components needed with specifications]
-
-#### Circuit Setup
-[Explain how to set up the circuit]
-
 ---
 
 ## Project Documentation
